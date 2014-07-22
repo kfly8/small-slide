@@ -11,20 +11,43 @@ angular.module('smallSlideApp', [])
   .controller 'MainCtrl', ($scope) ->
     return
 
-  .directive "resize", ($window) ->
+  .directive "slides", ($window) ->
     return (scope, element) ->
-        w            = angular.element($window)
-        slide_length = element.children('section').length
+        w      = angular.element($window)
+        slides = element.children('section')
+
+        slides.each (i,s) ->
+            angular.element(s).css('z-index', i)
 
         scope.getWindowDimensions = ->
+            top: angular.element($window).scrollTop()
             h: $window.innerHeight
             w: $window.innerWidth
 
         scope.$watch scope.getWindowDimensions, ((newValue, oldValue) ->
+
             scope.windowHeight = newValue.h
             scope.windowWidth  = newValue.w
+            scope.scrollTop    = newValue.top
+
+            idx   = parseInt(newValue.top / newValue.h)
+            cnt   = idx + 1
+            slide = slides.eq(idx)
+
+            if slide && newValue.top > oldValue.top
+                if !slide.hasClass('fixed') && cnt < slides.length
+                    slide.addClass('fixed')
+                    slide.css('margin-top', 0)
+                    slide.next().css('margin-top', newValue.h * cnt) if slide.next()
+
+            if slide && newValue.top < oldValue.top
+                if slide.hasClass('fixed') && cnt > 1
+                   slide.removeClass('fixed')
+                   slide.css('margin-top', newValue.h * idx)
+                   slide.next().css('margin-top', 0) if slide.next()
+
             scope.style = ->
-                height: newValue.h * slide_length + "px"
+                height: newValue.h * slides.length + "px"
                 width: newValue.w + "px"
 
             return
@@ -33,11 +56,6 @@ angular.module('smallSlideApp', [])
         w.bind "resize", ->
             scope.$apply()
 
-  .directive "parallex", ($window) ->
-    return (scope, element) ->
-        w = angular.element($window)
-
         w.bind "scroll", ->
-            scope.scrollTop = angular.element(this).scrollTop()
             scope.$apply()
 
