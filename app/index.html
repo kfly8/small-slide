@@ -20,7 +20,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="slides" ng-include="'views/main.html'" ng-controller="MainCtrl" ng-style="style()" resize></div>
+    <div id="slides" ng-include="'views/main.html'" ng-controller="MainCtrl" ng-style="style()" resize parallex></div>
     <!-- # TODO
     <footer>
         <p>&copy; <a href="https://twitter.com/kfly8">kfly8</a></p>
@@ -48,6 +48,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <!-- endbower -->

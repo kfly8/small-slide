@@ -33,3 +33,11 @@ angular.module('smallSlideApp', [])
         w.bind "resize", ->
             scope.$apply()
 
+  .directive "parallex", ($window) ->
+    return (scope, element) ->
+        w = angular.element($window)
+
+        w.bind "scroll", ->
+            scope.scrollTop = angular.element(this).scrollTop()
+            scope.$apply()
+
