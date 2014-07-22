@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="smallSlideApp" ng-style="style()" resize>
+  <body ng-app="smallSlideApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="slides" ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <div id="slides" ng-include="'views/main.html'" ng-controller="MainCtrl" ng-style="style()" resize></div>
     <!-- # TODO
     <footer>
         <p>&copy; <a href="https://twitter.com/kfly8">kfly8</a></p>

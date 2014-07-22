@@ -12,8 +12,9 @@ angular.module('smallSlideApp', [])
     return
 
   .directive "resize", ($window) ->
-    return (scope) ->
-        w = angular.element($window)
+    return (scope, element) ->
+        w            = angular.element($window)
+        slide_length = element.children('section').length
 
         scope.getWindowDimensions = ->
             h: $window.innerHeight
@@ -21,9 +22,9 @@ angular.module('smallSlideApp', [])
 
         scope.$watch scope.getWindowDimensions, ((newValue, oldValue) ->
             scope.windowHeight = newValue.h
-            scope.windowWidth = newValue.w
+            scope.windowWidth  = newValue.w
             scope.style = ->
-                height: newValue.h * 5 + "px" # FIXME slideの数だけかけ算するようにする
+                height: newValue.h * slide_length + "px"
                 width: newValue.w + "px"
 
             return
