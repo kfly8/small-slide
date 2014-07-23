@@ -31,6 +31,16 @@ html, body, #slides {
         &.fixed {
             position: fixed;
         }
+
+        pre {
+            margin: 0;
+            width: 100%;
+
+            code.hljs {
+                height: 100%;
+                padding: 5em;
+            }
+        }
     }
 }
 

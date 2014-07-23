@@ -7,7 +7,7 @@
  # # MainCtrl
  # Controller of the smallSlideApp
 ###
-angular.module('smallSlideApp', [])
+angular.module('smallSlideApp', ['hljs'])
   .controller 'MainCtrl', ($scope) ->
     return
 
@@ -17,7 +17,11 @@ angular.module('smallSlideApp', [])
         slides = element.children('section')
 
         slides.each (i,s) ->
-            angular.element(s).css('z-index', i)
+            $slide = angular.element(s)
+            $slide.css('z-index', i)
+            $child = $slide.children('pre').first()
+            if $child
+                $child.css('height', $window.innerHeight)
 
         scope.getWindowDimensions = ->
             top: angular.element($window).scrollTop()
